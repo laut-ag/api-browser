@@ -3,7 +3,10 @@
      * /server_status
      * {running: Boolean, message: String}
      */
-    export const isServerRunning = function() {}
+export const isServerRunning = async function() {
+    const resp = await query('server_status')
+    return resp.running
+}
 
     /**
      * Server Time
@@ -11,7 +14,10 @@
      * String
      */
 
-    export const serverTime = function() {}
+export const serverTime = async function() {
+    const resp = await query('time')
+    return resp 
+}
 
     /**
      * Letters
@@ -19,9 +25,15 @@
      * []
      */
 
-    export const letters = function() {}
+export const letters = async function() {
+    const resp = await query('letters')
+    return resp 
+}
     
-    export const hasLetter = function(letter) {}
+export const hasLetter = async function(letter) {
+    const resp = await query('letters')
+    return resp.indexOf(letter) !== -1
+}
 
     /**
      * Genres
@@ -29,9 +41,16 @@
      * [{name: String, score: Integer, related:[Strig]}, ...]
      */
 
-    export const genres = function() {}
+export const genres = async function() {
+    const resp = await query('genres')
+    return resp.map( g => g.name )
+}
 
-    export const relatedGenres = function(genre) {}
+export const relatedGenres = async function(genre) {
+    const resp = await query('genres')
+    const selGen = resp.filter( g => g.name === genre )
+    return selGen.related
+}
 
     /**
      * Station Names
@@ -39,9 +58,15 @@
      * [String, ...]
      */
 
-    export const stationNames = function() {}
+export const stationNames = async function() {
+    const resp = await query('station_names')
+    return resp
+}
 
-    export const hasStation = function(station) {}
+export const hasStation = async function(station) {
+    const resp = await query('station_names')
+    return resp.indexOf(station) !== -1
+}
 
     /**
      * Listeners
@@ -49,9 +74,19 @@
      * {"StationName"(key): Integer, ...}
      */
 
-    export const allListeners = function() {}
+export const allListeners = async function() {
+    const resp = await query('listeners')
+    let sum = 0
+    for(let key in resp) {
+        sum += parseInt(resp[key])
+    }
+    return sum
+}
 
-    export const listeners = function(station) {}
+export const listeners = async function(station) {
+    const resp = await query('listeners')
+    return resp[station]
+}
 
     /**
      * Teaser
@@ -65,11 +100,20 @@
      * [{Station}, ...]
      */
 
-    export const liveStations = function() {}
+export const liveStations = async function() {
+    const resp = await query('stations/live')
+    return resp
+}
 
-    export const stationIsLive = function(station) {}
+export const stationIsLive = async function(station) {
+    const resp = await query('stations/live')
+    return resp.filter( s => s.name === station ).length !== 0
+}
 
-    export const numLiveStations = function() {}
+export const numLiveStations = async function() {
+    const resp = await query('stations/live')
+    return resp.length
+}
 
     /**
      * Song Change JSON Stream
@@ -102,8 +146,18 @@
      * @param {Float} long
      * @param {String,...} station(s)
      */
+const assignOptions = function(options){
+    const ops = ['limit','offset','lat','long']
+    if(! (options instanceof Array) ) { throw }
+    if( options.length === 3 ) { throw }
+    if( options.filter( o => typeof o === 'number' ).length ) { throw }
+    const cleanOb = {}
+    options.forEach( (o,index) => cleanOb[ ops[index] ] = o )
+    return cleanOb
+}
 
-    export const stations = function(stations, options) {}
+export const stations = function(stations = null, options = []) {
+}
 
     /**
      * Stations by Letters
