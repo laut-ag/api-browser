@@ -5,7 +5,6 @@ export const query = async function(url, params = {}) {
     const responseType = 'json'
     const timeout = 2000
     const baseURL = 'http://api.laut.fm/'
-    const params = querystring.stringify(params)
     try {
         const response = await axios({
             method: 'get',
