@@ -80,13 +80,13 @@ export const genresRaw = async function() {
  * Gets raw genres objects related to another genre
  *
  * @param {string} an existing genre
- * @returns {promise<array>} [{name: String, score: Integer, related:[Strig]}, ...]
+ * @returns {promise<array>} {name: String, score: Integer, related:[Strig]}
  */
 
-export const relatedGenresRaw = async function(genre) {
+export const genre = async function(genre) {
     const resp = await query('genres')
     const selGen = resp.filter( g => g.name === genre )
-    return selGen.related
+    return selGen[0]
 }
 
 /* Gets all genres related to antother genre
@@ -98,7 +98,7 @@ export const relatedGenresRaw = async function(genre) {
 export const relatedGenres = async function(genre) {
     const resp = await query('genres')
     const selGen = resp.filter( g => g.name === genre )
-    return selGen.map( g => g.name )
+    return selGen[0].related
 }
 
 /**
@@ -125,9 +125,9 @@ export const hasStation = async function(station) {
 }
 
 /**
- * Gets all stations and corresponding number of listeners
+ * Gets total number of listeners
  *
- * @returns {promise<object>} {"StationName"(key): Integer, ...}
+ * @returns {promise<number>}
  */
 
 export const allListeners = async function() {
@@ -150,12 +150,6 @@ export const listeners = async function(station) {
     const resp = await query('listeners')
     return resp[station]
 }
-
-    /**
-     * Teaser
-     * /teaser
-     * [{headline: String, schedule:[], link:String, img_l: String, img_m: String, img_s: String}, ...]
-     */
 
 /**
  * Get raw objects of all stations broadcasting live
@@ -202,32 +196,24 @@ export const numLiveStations = async function() {
     return resp.length
 }
 
-    /**
-     * Song Change JSON Stream
-     * /song_change.stream.json
-     */
+const assignOptions = function(options = {}){
+    const allowedKeys = [ 'lat', 'long', 'offset', 'limit' ]
+    if(! (options instanceof Object) ) { throw 'not an Object' }
+    if( ( options.lat && ! options.long ) || ( options.long && ! options.lat ) ) { throw 'both lat and long are required' }
+    if( options.offset && ! options.limit ) { throw 'offset requires limit' }
+    for ( const key in options ) {
+        if ( ! allowedKeys.includes( key ) ) { throw `${key} is not an allowed option` }
+    }
+    return options
+}
 
-    /**
-     * Song Change WebSocket
-     * /song_change.ws.json
-     */
-
-    /**
-     * Song Change Chunks (last 50)
-     * /song_change.chunk.json
-     * {Song, ...}
-     */
-
-const assignOptions = function(options){
-    const ops = ['limit','offset','lat','long']
-    if(! (options instanceof Array) ) { throw 'not an Array' }
-    if( options.length === 3 ) { throw 'no 3 options allowed' }
-    if( options.filter( o => typeof o !== 'number' ).length ) { throw 'something isnt a number' }
-    //let params = ''
-    //options.forEach( (o,index) => params += `${ops[index]}=${o}&`)
-    const cleanOb = {}
-    options.forEach( (o,index) => cleanOb[ ops[index] ] = o )
-    return cleanOb
+const formatResult = function(resp){
+    if(resp.items) {
+        let {items:stations, ...pagination} = resp
+        return {stations, pagination}
+    } else {
+        return resp
+    }
 }
 
 /**
@@ -241,23 +227,8 @@ const assignOptions = function(options){
 export const allStations = async function(options) {
     const cops = assignOptions(options)
     const resp = await query('/stations', cops) 
-    return resp
+    return formatResult(resp)
 } 
-
-/**
- * Gets information for specific stations
- * /stations/commaseparatedlist
- * @todo only two ops here...fix
- *
- * @param {array.<string>} stations
- * @param {array.<number>} [options] lat long
- * @returns {promise<array>} [{Station}, ...]
- */
-export const stations = async function(stations, options){
-    const cops = assignOptions(options)
-    const resp = await query(`stations/${stations}`, cops)
-    return resp
-}
 
 /**
  * Get stations beginning with a certain letter or number
@@ -273,11 +244,28 @@ export const stationStartsWith = async function(startw, options) {
     const cops = assignOptions(options)
     if (parseInt(startw)) {
         const resp = await query('/stations/numbers', cops)
-        return resp.filter( s => s.name[0] == startw )
+        const filteredResults = resp.filter( s => s.name[0] == startw )
+        return formatResult(filteredResults)
     } else {
         const resp = await query(`/stations/letter/${startw}`, cops)
-        return resp
+        return formatResult(resp)
     }
+}
+
+/**
+ * Gets information for specific stations
+ * /stations/commaseparatedlist
+ * @todo only two ops here...fix
+ *
+ * @param {array.<string>} stations
+ * @param {array.<number>} [options] lat long
+ * @returns {promise<array>} [{Station}, ...]
+ */
+export const stations = async function(stations, options = {}){
+    if ( options.offset || options.limit ) { throw 'can not use limit and/or offset with this list' }
+    const cops = assignOptions(options)
+    const resp = await query(`stations/${stations}`, cops)
+    return resp
 }
 
 /**
@@ -295,3 +283,26 @@ export const stationsByGenre = function(genre, options) {}
      * Search
      * (?-mix:\A\/station\/([\w\d_\-]+)\/images\/([\w\d_\-]+)\Z)
      */
+
+    /**
+     * Song Change JSON Stream
+     * /song_change.stream.json
+     */
+
+    /**
+     * Song Change WebSocket
+     * /song_change.ws.json
+     */
+
+    /**
+     * Song Change Chunks (last 50)
+     * /song_change.chunk.json
+     * {Song, ...}
+     */
+
+    /**
+     * Teaser
+     * /teaser
+     * [{headline: String, schedule:[], link:String, img_l: String, img_m: String, img_s: String}, ...]
+     */
+
