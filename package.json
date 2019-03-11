@@ -1,5 +1,5 @@
 {
-  "name": "lautapi",
+  "name": "lautfm-api",
   "version": "0.0.6",
   "description": "JS wrapper for public laut.fm api",
   "main": "./lib/index.js",
