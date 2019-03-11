@@ -1,6 +1,6 @@
 {
   "name": "lautapi",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JS wrapper for public laut.fm api",
   "main": "./lib/index.js",
   "scripts": {
