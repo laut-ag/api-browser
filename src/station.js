@@ -111,32 +111,32 @@ export default class Station {
      * @return {string}
      */
     imagesSize ( type, size = '' ) {
-        return case (type){
-            'station':
-            case (size){
-                'sm':
-                    this.genData.images.station_80x80
+        switch (type) {
+            case 'station':
+            switch (size) {
+                case 'sm':
+                    return this.genData.images.station_80x80
                     break;
-                'md':
-                    this.genData.images.station_120x120
+                case 'md':
+                    return this.genData.images.station_120x120
                     break;
-                'lg':
-                    this.genData.images.station.640x640
+                case 'lg':
+                    return this.genData.images.station_640x640
                     break;
                 default:
-                    this.genData.images.station
+                    return this.genData.images.station
                     break;
             }
-            'background':
-            case (size){
-                'portrait':
-                    this.genData.images.background_768x1024
+            case 'background':
+            switch (size) {
+                case 'portrait':
+                    return this.genData.images.background_768x1024
                     break;
-                'landscape':
-                    this.genData.images.background_1024x768
+                case 'landscape':
+                    return this.genData.images.background_1024x768
                     break;
                 default:
-                    this.genData.background
+                    return this.genData.background
                     break;
             }
         }
