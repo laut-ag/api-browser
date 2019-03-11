@@ -1,3 +1,6 @@
+import '@babel/polyfill'
+import axios from 'axios'
+
 import Station from '../src/station'
 
 describe( 'station class', () => {
@@ -60,6 +63,5 @@ describe( 'accessing with getters', () => {
         const zwo = await new Station('eins').init()
         expect(zwo.name).toBe('eins')
         expect(zwo.position).toEqual(expect.any(Number))
-        console.log(zwo.genresC(2))
     } )
 } )

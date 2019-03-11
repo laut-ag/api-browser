@@ -1,5 +1,6 @@
+import '@babel/polyfill'
+import axios from 'axios'
 import * as api from '../src/api.js'
-expect.extend
 
 it( 'returns server status', async () => {
    const serverRunning = await api.isServerRunning()

@@ -1,10 +1,14 @@
-const presets = [
-    [
-        '@babel/preset-env',
-        {
-            modules: false,
-        }
+module.exports = api => {
+    const presets = [
+        [
+            '@babel/preset-env'
+        ]
     ]
-]
 
-module.exports = { presets }
+    if ( !api.env('test') ) {
+        presets[0].push({modules:false})
+    }
+
+    return { presets }
+}
+
