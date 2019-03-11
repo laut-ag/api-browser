@@ -1,6 +1,3 @@
-import axios from 'axios' 
-import querystring from 'querystring' 
-
 export const query = async function(url, params = {}) {
     const responseType = 'json'
     const timeout = 2000

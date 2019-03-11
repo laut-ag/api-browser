@@ -4,7 +4,7 @@
   "description": "JS wrapper for public laut.fm api",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "npx babel src -d lib",
     "test": "jest"
   },
   "jest": {
