@@ -3,7 +3,7 @@ import axios from 'axios'
 export const query = async function(url, params = {}) {
     const responseType = 'json'
     const timeout = 2000
-    const baseURL = 'http://api.laut.fm/'
+    const baseURL = 'https://api.laut.fm/'
     try {
         const response = await axios({
             method: 'get',
