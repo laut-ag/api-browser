@@ -1,9 +1,10 @@
 import {query} from './query'
 
 /**
- * Server Status
+ * Gets the boolean value if the server is running
+ * or not
  * 
- * @returns {promise<boolean>}
+ * @returns {Promise.<string>} true = running
  */
 export const isServerRunning = async function() {
     const resp = await query('server_status')
@@ -11,9 +12,9 @@ export const isServerRunning = async function() {
 }
 
 /**
- * Gets entire data of server status
+ * Gets the status object of the server
  *
- * @returns {promise<object>} {running: Boolean, message: String}
+ * @returns {Promise.<object>} server status object {running:boolean, message:string}
  */
 export const serverStatus = async function() {
     const resp = await query('server_status')
@@ -21,9 +22,9 @@ export const serverStatus = async function() {
 }
 
 /**
- * Gets time referenced on server
+ * Gets the time from the server 
  *
- * @returns {promise<string>}
+ * @returns {Promise.<string>} time as string
  */
 
 export const serverTime = async function() {
@@ -34,7 +35,7 @@ export const serverTime = async function() {
 /**
  * Gets unique array of all first letters of stations
  *
- * @returns {promise<array>} [String, ...]
+ * @returns {Promise.<array>} first letters of all stations
  */
 
 export const letters = async function() {
@@ -45,8 +46,8 @@ export const letters = async function() {
 /**
  * Determines if any stations starts with a certain letter
  *
- * @param {string} letter
- * @returns {promise<boolean>}
+ * @param {string} letter - letter to test
+ * @returns {Promise.<boolean>} if a station begins with the given letter
  */
     
 export const hasLetter = async function(letter) {
@@ -57,7 +58,7 @@ export const hasLetter = async function(letter) {
 /**
  * Get all genres available
  *
- * @returns {promise<array>} [String, ...]
+ * @returns {Promise.<array>} all genres
  */
 
 export const genres = async function() {
@@ -66,9 +67,9 @@ export const genres = async function() {
 }
 
 /**
- * Gets all raw genres objects
+ * Gets raw object of all genres
  *
- * @return {promise<array>} [{name: String, score: Integer, related:[Strig]}, ...]
+ * @return {Promise.<array>} array of genre objects {name:string, score:number, related:[string,...]}
  */
 
 export const genresRaw = async function() {
@@ -79,8 +80,8 @@ export const genresRaw = async function() {
 /**
  * Gets raw genres objects related to another genre
  *
- * @param {string} an existing genre
- * @returns {promise<array>} {name: String, score: Integer, related:[Strig]}
+ * @param {string} genre - an existing genre
+ * @returns {Promise.<array>} array of raw related genres objects {name:string, score:number, related:[string, ...]}
  */
 
 export const genre = async function(genre) {
@@ -91,8 +92,8 @@ export const genre = async function(genre) {
 
 /* Gets all genres related to antother genre
  *
- * @param {string} genre an existing genre
- * @returns {promise<array>} [String, ...]
+ * @param {string} genre - an existing genre
+ * @returns {Promise.<array>} genres
  */
 
 export const relatedGenres = async function(genre) {
@@ -104,7 +105,7 @@ export const relatedGenres = async function(genre) {
 /**
  * Gets all station names
  *
- * @returns {promise<array>} [String, ...]
+ * @returns {Promise.<array>} all station names
  */
 
 export const stationNames = async function() {
@@ -115,8 +116,8 @@ export const stationNames = async function() {
 /**
  * Indicates if a station exists
  *
- * @param {string} station
- * @returns {promise<boolean>}
+ * @param {string} station - station to test
+ * @returns {Promise.<boolean>} if station tested exists
  */
 
 export const hasStation = async function(station) {
@@ -127,7 +128,7 @@ export const hasStation = async function(station) {
 /**
  * Gets total number of listeners
  *
- * @returns {promise<number>}
+ * @returns {Promise.<number>} number of current listeners
  */
 
 export const allListeners = async function() {
@@ -142,8 +143,8 @@ export const allListeners = async function() {
 /**
  * Gets listeners for a particular station
  *
- * @param {string} station
- * @returns {promise<number>}
+ * @param {string} station - station to get listeners for
+ * @returns {Promise.<number>} number of listeners for station
  */
 
 export const listeners = async function(station) {
@@ -154,7 +155,7 @@ export const listeners = async function(station) {
 /**
  * Get raw objects of all stations broadcasting live
  *
- * @returns {promise<array>} [{Station}, ...]
+ * @returns {Promise.<array>} array of station objects broadcasting live
  */
 
 export const liveStationsRaw = async function() {
@@ -165,7 +166,7 @@ export const liveStationsRaw = async function() {
 /**
  * Get names of all stations broadcasting live
  *
- * @returns {promise<array>} [String, ...]
+ * @returns {Promise.<array>} all stations broadcasting live
  */
 
 export const liveStations = async function() {
@@ -176,8 +177,8 @@ export const liveStations = async function() {
 /**
  * Determine if a station is currently broadcasting live
  *
- * @param {string} station
- * @returns {promise<boolean>}
+ * @param {string} station - station to test
+ * @returns {Promise.<boolean>} if station is broadcasting live
  */
 
 export const stationIsLive = async function(station) {
@@ -188,7 +189,7 @@ export const stationIsLive = async function(station) {
 /**
  * Indicate how many stations are broadcasting live
  *
- * @returns {promise<number>}
+ * @returns {Promise.<number>} number of stations broadcasting live
  */
 
 export const numLiveStations = async function() {
@@ -218,13 +219,12 @@ const formatResult = function(resp){
 
 /**
  * Gets all Stations
- * /stations
  *
- * @param {array.<number>} [options] limit,offset,lat,long
- * @returns {promise<array>} [{Station}, ...]
+ * @param {object} options - {limit:number, offset:number, lat:number, long:number}
+ * @returns {Promise.<array>} an array of station objects
  */
 
-export const allStations = async function(options) {
+export const allStations = async function(options = {}) {
     const cops = assignOptions(options)
     const resp = await query('/stations', cops) 
     return formatResult(resp)
@@ -232,15 +232,13 @@ export const allStations = async function(options) {
 
 /**
  * Get stations beginning with a certain letter or number
- * /stations/letter/{letter}
- * /stations/numbers
  *
- * @param {string|number} startw station starts with
- * @param {array.<number>} [options] limit,offset,lat,long
- * @returns {promise<array>} [{Station}, ...]
+ * @param {(string|number)} startw - station starts with
+ * @param {object} options - {limit:number, offset:number, lat:number, long:number}
+ * @returns {Promise.<array>} array of station objects
  */
 
-export const stationStartsWith = async function(startw, options) {
+export const stationStartsWith = async function(startw, options = {}) {
     const cops = assignOptions(options)
     if (parseInt(startw)) {
         const resp = await query('/stations/numbers', cops)
@@ -254,12 +252,10 @@ export const stationStartsWith = async function(startw, options) {
 
 /**
  * Gets information for specific stations
- * /stations/commaseparatedlist
- * @todo only two ops here...fix
  *
- * @param {array.<string>} stations
- * @param {array.<number>} [options] lat long
- * @returns {promise<array>} [{Station}, ...]
+ * @param {array} stations - array of station names
+ * @param {object} options - {lat:number, long:number}
+ * @returns {Promise.<array>} array of station objects
  */
 export const stations = async function(stations, options = {}){
     if ( options.offset || options.limit ) { throw 'can not use limit and/or offset with this list' }
@@ -270,39 +266,44 @@ export const stations = async function(stations, options = {}){
 
 /**
  * Get all stations of a particular genre
- * /stations/genre/{genre}
+ * @todo not implemented yet
  *
- * @param {string} genre [\w\d\-]+
- * @param {array.<number>} options limit,offset,lat,long
- * @returns {promise<array>} [{Station}, ...]
+ * @param {string} genre - genre to search for
+ * @param {object} options - {limit:number, offset:number, lat:number, long:number}
+ * @returns {Promise.<array>} array of station objects
  */
 
-export const stationsByGenre = function(genre, options) {}
+export const stationsByGenre = function(genre, options = {}) {}
 
     /**
      * Search
      * (?-mix:\A\/station\/([\w\d_\-]+)\/images\/([\w\d_\-]+)\Z)
+     * @todo not implemented yet
      */
 
     /**
      * Song Change JSON Stream
      * /song_change.stream.json
+     * @todo not implemented yet
      */
 
     /**
      * Song Change WebSocket
      * /song_change.ws.json
+     * @todo not implemented yet
      */
 
     /**
      * Song Change Chunks (last 50)
      * /song_change.chunk.json
      * {Song, ...}
+     * @todo not implemented yet
      */
 
     /**
      * Teaser
      * /teaser
      * [{headline: String, schedule:[], link:String, img_l: String, img_m: String, img_s: String}, ...]
+     * @todo not implemented yet
      */
 
