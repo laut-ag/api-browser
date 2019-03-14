@@ -6,6 +6,10 @@ This is an importable wrapper for the Laut.fm public API. It features the abilit
 
 This liberary uses promises and ES\* code. It is meant to be used as part of a build system and may/will need polyfilling to work in your environment. You **will** have to pollyfill promises as a minimum. This liberary is *not* meant to be consumed directly by browsers. If you are interested in a liberary that can be used directly in the browser, without polyfilling, or without promises, take a look at the wonderful liberary at <https://github.com/lautde/lautfm\_js\_tools>.
 
+## Documentation
+
+Full documentation can be found at <https://fvhockney.github.io/lautfm-api>
+
 ## Installation
 
 ```bash
@@ -87,8 +91,6 @@ import { Station } from 'lautfm-api'
     console.log( einsPlaylists )
   })()
 ```
-
-## Documentation
 
 ## Tests
 
