@@ -1,6 +1,6 @@
 {
   "name": "lautfm-api",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "JS wrapper for public laut.fm api",
   "main": "./lib/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "jest"
   },
   "keywords": [
-      "lautfm"
+    "lautfm"
   ],
   "repository": "github:fvhockney/lautfm-api",
   "jest": {
