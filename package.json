@@ -24,6 +24,7 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.4",
     "axios": "^0.18.0",
+    "axios-mock-adapter": "^1.16.0",
     "babel-jest": "^24.3.1",
     "documentation": "^9.3.1",
     "jest": "^24.3.1",
