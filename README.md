@@ -1,3 +1,8 @@
+![npm](https://img.shields.io/npm/v/lautfm-api.svg)
+![NPM](https://img.shields.io/npm/l/lautfm-api.svg)
+![npm](https://img.shields.io/npm/dw/lautfm-api.svg)
+![Travis (.org) branch](https://img.shields.io/travis/fvhockney/lautfm-api/master.svg)
+
 # Importable Public API for Laut.fm
 
 This is an importable wrapper for the Laut.fm public API. It features the ability to import only the functions that a user needs in any particular file. It is also compatible with tree shaking when used with a build system like webpack.
