@@ -1,4 +1,3 @@
-import '@babel/polyfill'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import * as api from '../src/api.js'
