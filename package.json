@@ -1,6 +1,6 @@
 {
   "name": "lautfm-api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "JS wrapper for public laut.fm api",
   "main": "cjs/",
   "module": "esm/",
