@@ -342,7 +342,6 @@ const stations = async function (stations, options = {}) {
 };
 /**
  * Get all stations of a particular genre
- * @todo not implemented yet
  *
  * @param {string} genre - genre to search for
  * @param {object} options - {limit:number, offset:number, lat:number, long:number}
@@ -352,7 +351,11 @@ const stations = async function (stations, options = {}) {
 
 exports.stations = stations;
 
-const stationsByGenre = function (genre, options = {}) {};
+const stationsByGenre = async function (genre, options = {}) {
+  const cops = assignOptions(options);
+  const resp = await (0, _query.query)(`stations/genre/${genre}`, cops);
+  return resp;
+};
 /**
  * Search
  * (?-mix:\A\/station\/([\w\d_\-]+)\/images\/([\w\d_\-]+)\Z)

@@ -3,3 +3,4 @@ src/
 travis.yml
 tests/
 coverage/
+docs/

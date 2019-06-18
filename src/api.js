@@ -266,14 +266,16 @@ export const stations = async function(stations, options = {}){
 
 /**
  * Get all stations of a particular genre
- * @todo not implemented yet
  *
  * @param {string} genre - genre to search for
  * @param {object} options - {limit:number, offset:number, lat:number, long:number}
  * @returns {Promise.<array>} array of station objects
  */
-
-export const stationsByGenre = function(genre, options = {}) {}
+export const stationsByGenre = async function(genre, options = {}) {
+    const cops = assignOptions(options)
+    const resp = await query(`stations/genre/${genre}`, cops)
+    return resp
+}
 
     /**
      * Search
