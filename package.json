@@ -28,16 +28,16 @@
   "author": "Vern Hockney <vern@laut.fm>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/plugin-transform-runtime": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "axios": "^0.19.0",
-    "axios-mock-adapter": "^1.16.0",
+    "axios-mock-adapter": "^1.17.0",
     "babel-jest": "^24.8.0",
     "documentation": "^9.3.1",
     "jest": "^24.8.0",
-    "jsdoc": "^3.6.2"
+    "jsdoc": "^3.6.3"
   },
   "peerDependencies": {
     "axios": "^0.19.0"
