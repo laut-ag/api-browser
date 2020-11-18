@@ -1,17 +1,18 @@
 import axios from 'axios'
 
+let _pubApiInstance = axios.create({
+  responseType: 'json',
+  timeout: 2000,
+  baseURL: 'https://api.laut.fm/'
+})
+
+
 export const query = async function(url, params = {}) {
-    const responseType = 'json'
-    const timeout = 2000
-    const baseURL = 'https://api.laut.fm/'
     try {
-        const response = await axios({
+        const response = await _pubApiInstance({
             method: 'get',
-            baseURL,
             url,
-            responseType,
             params,
-            timeout,
         })
         const data = await response.data
         return data
