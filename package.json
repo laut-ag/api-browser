@@ -1,6 +1,6 @@
 {
   "name": "@lautag/api-browser",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "JS wrapper for public laut.fm api",
   "browser": "./cjs/index.js",
   "module": "./esm/index.js",
