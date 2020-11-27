@@ -1,0 +1,87 @@
+file_path_prefix = "tests/data/"
+
+base_uri = "https://api.laut.fm"
+
+[[endpoints]]
+file = "server_status.json"
+uri = "/server_status" 
+
+[[endpoints]]
+file = "time.json"
+uri = "/time"
+
+[[endpoints]]
+file = "letters.json"
+uri = "/letters"
+
+[[endpoints]]
+file = "genres.json"
+uri = "/genres"
+
+[[endpoints]]
+file = "station_names.json"
+uri = "/station_names"
+
+[[endpoints]]
+file = "listeners.json"
+uri = "/listeners"
+
+[[endpoints]]
+file = "live_stations.json"
+uri = "/stations/live"
+
+# TODO: add limit, offset, lat, long
+[[endpoints]]
+file = "all_stations.json"
+uri = "/stations"
+
+# TODO: add limit, offset, lat, long
+[[endpoints]]
+file = "all_stations_a.json"
+uri = "/stations/letter/a"
+
+[[endpoints]]
+file = "all_stations_a_offset_limit.json"
+uri = "/stations/letter/a?offset=10&limit=5"
+
+# TODO: add lat, long
+[[endpoints]]
+file = "all_stations_genre_rock.json"
+uri = "/stations/genre/rock"
+
+[[endpoints]]
+file = "all_stations_offset_limit.json"
+uri = "/stations?offset=10&limit=5"
+
+
+[[endpoints]]
+file = "eins_hayom.json"
+uri = "/stations/eins,radiohayom"
+
+[[endpoints]]
+file = "hayom.json"
+uri = "/station/radiohayom"
+
+[[endpoints]]
+file = "hayom_current_song.json"
+uri = "/station/radiohayom/current_song"
+
+[[endpoints]]
+file = "hayom_last_songs.json"
+uri = "/station/radiohayom/last_songs"
+
+[[endpoints]]
+file = "hayom_schedule.json"
+uri = "/station/radiohayom/schedule"
+
+[[endpoints]]
+file = "hayom_playlists.json"
+uri = "/station/radiohayom/playlists"
+
+[[endpoints]]
+file = "hayom_listeners.json"
+uri = "/station/radiohayom/listeners"
+
+[[endpoints]]
+file = "hayom_next_artists.json"
+uri = "/station/radiohayom/next_artists"

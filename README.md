@@ -9,25 +9,27 @@ This is an importable wrapper for the Laut.fm public API. It features the abilit
 
 ## Important Information
 
-This liberary uses promises and ES\* code. It is meant to be used as part of a build system and may/will need polyfilling to work in your environment. You **will** have to pollyfill promises as a minimum. This liberary is *not* meant to be consumed directly by browsers. If you are interested in a liberary that can be used directly in the browser, without polyfilling, or without promises, take a look at the wonderful liberary at <https://github.com/lautde/lautfm\_js\_tools>.
+This liberary comes with a commonJs build and an ES2015(ES6) build. The commonJs build is located in `./cjs` and exposed in `package.json#browser` while the ES6 build is located in `./esm` and exposed in `package.json#module`. In either case, you will need to polyfill `Promise** if you want to use it in an environment that does not provide a native implementation.
+
+**As of version 3.0.0, we no longer require `axios` as peer dependency. We know use the browsers native `XMLHttpRequest` object to fulfill all requests**
+
+If you are interested in a liberary that can be used directly in the browser, without polyfilling, or without promises, take a look at the wonderful liberary at <https://github.com/lautde/lautfm_js_tools>.
 
 ## Documentation
 
-Full documentation can be found at <https://fvhockney.github.io/lautfm-api>
+Full documentation can be found at <https://laut-ag.github.io/api-browser>
 
 ## Installation
 
 ```bash
-npm i lautfm-api
+npm i @lautag/api-browser
 ```
-
-- You will need to install `axios` and `@babel/polyfill` as peer dependencies in order to use this liberary.
 
 ## Use
 
 Import entire liberary
 ```js
-import * as lautapi from 'lautfm-api'
+import * as lautapi from '@lautag/api-browser'
 
 api.isServerRunning()
     .then( data => console.log( data ) )
@@ -41,7 +43,7 @@ api.genres()
 
 Import only specific functions
 ```js
-import { isServerRunning, genres } from 'lautfm-api'
+import { isServerRunning, genres } from '@lautag/api-browser'
 
 isServerRunning()
     .then( data => console.log( data ) )
@@ -53,25 +55,9 @@ genres()
 
 ```
 
-If you are already in a function you can mark it as async and use the more concise `async/await` syntax
-```js
-import { isServerRunning } from 'lautfm-api'
-
-const isRunning = async () => {
-    try {
-        const data = await isServerRunning()
-        console.log( data )
-    } catch ( error ) {
-        console.error( error )
-    }
-}
-
-isRunning()
-```
-
 You can also create an object to work with a specific station
 ```js
-import { Station } from 'lautfm-api'
+import { Station } from '@lautag/api-browser'
 
 const eins = new Station( 'eins' )
 eins.lastSong()
@@ -81,7 +67,7 @@ eins.lastSong()
 
 Or if you can initialize a station and have access to quite a bit of information without having to make multiple requests
 ```js
-import { Station } from 'lautfm-api'
+import { Station } from '@lautag/api-browser'
 
 ( async () => {
     const eins = await new Station( 'eins' ).init()

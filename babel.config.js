@@ -22,8 +22,9 @@ module.exports = {
         },
         test: {
             presets: [
+              '@babel/preset-typescript',
                 [
-                    '@babel/env',
+                    '@babel/preset-env',
                     {
                         targets: {
                             node: 'current',

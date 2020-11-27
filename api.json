@@ -1,0 +1,82 @@
+[
+  {
+    "uri": "https://api.laut.fm/server_status",
+    "file": "tests/data/server_status.json"
+  },
+  {
+    "uri": "https://api.laut.fm/time",
+    "file": "tests/data/time.json"
+  },
+  {
+    "uri": "https://api.laut.fm/letters",
+    "file": "tests/data/letters.json"
+  },
+  {
+    "uri": "https://api.laut.fm/genres",
+    "file": "tests/data/genres.json"
+  },
+  {
+    "uri": "https://api.laut.fm/station_names",
+    "file": "tests/data/station_names.json"
+  },
+  {
+    "uri": "https://api.laut.fm/listeners",
+    "file": "tests/data/listeners.json"
+  },
+  {
+    "uri": "https://api.laut.fm/stations/live",
+    "file": "tests/data/live_stations.json"
+  },
+  {
+    "uri": "https://api.laut.fm/stations",
+    "file": "tests/data/all_stations.json"
+  },
+  {
+    "uri": "https://api.laut.fm/stations/letter/a",
+    "file": "tests/data/all_stations_a.json"
+  },
+  {
+    "uri": "https://api.laut.fm/stations/letter/a?offset=10&limit=5",
+    "file": "tests/data/all_stations_a_offset_limit.json"
+  },
+  {
+    "uri": "https://api.laut.fm/stations/genre/rock",
+    "file": "tests/data/all_stations_genre_rock.json"
+  },
+  {
+    "uri": "https://api.laut.fm/stations?offset=10&limit=5",
+    "file": "tests/data/all_stations_offset_limit.json"
+  },
+  {
+    "uri": "https://api.laut.fm/stations/eins,radiohayom",
+    "file": "tests/data/eins_hayom.json"
+  },
+  {
+    "uri": "https://api.laut.fm/station/radiohayom",
+    "file": "tests/data/hayom.json"
+  },
+  {
+    "uri": "https://api.laut.fm/station/radiohayom/current_song",
+    "file": "tests/data/hayom_current_song.json"
+  },
+  {
+    "uri": "https://api.laut.fm/station/radiohayom/last_songs",
+    "file": "tests/data/hayom_last_songs.json"
+  },
+  {
+    "uri": "https://api.laut.fm/station/radiohayom/schedule",
+    "file": "tests/data/hayom_schedule.json"
+  },
+  {
+    "uri": "https://api.laut.fm/station/radiohayom/playlists",
+    "file": "tests/data/hayom_playlists.json"
+  },
+  {
+    "uri": "https://api.laut.fm/station/radiohayom/listeners",
+    "file": "tests/data/hayom_listeners.json"
+  },
+  {
+    "uri": "https://api.laut.fm/station/radiohayom/next_artists",
+    "file": "tests/data/hayom_next_artists.json"
+  }
+]

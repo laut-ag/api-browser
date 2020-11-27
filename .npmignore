@@ -4,3 +4,5 @@ travis.yml
 tests/
 coverage/
 docs/
+api.json
+api.toml
