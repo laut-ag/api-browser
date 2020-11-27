@@ -1,5 +1,5 @@
 {
-  "name": "api-browser",
+  "name": "@lautag/api-browser",
   "version": "3.0.0",
   "description": "JS wrapper for public laut.fm api",
   "browser": "./cjs/index.js",
@@ -12,6 +12,7 @@
     "build:types": "tsc -p tsconfig.types.json",
     "test": "jest",
     "docs": "typedoc --tsconfig tsconfig.types.json",
+    "docs:publish": "git subtree push --prefix docs origin gh-pages",
     "clean-dirs": "rm -rf ./cjs ./esm ./types"
   },
   "keywords": [
