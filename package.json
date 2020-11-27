@@ -1,12 +1,12 @@
 {
   "name": "api-browser",
-  "version": "2.1.3",
+  "version": "3.0.0",
   "description": "JS wrapper for public laut.fm api",
   "browser": "./cjs/index.js",
   "module": "./esm/index.js",
   "types": "./types/index.d.ts",
   "scripts": {
-    "build": "npm run clean-dirs && npm run build:esm && npm run build:cjs && npm run build:types && npm run docs",
+    "build": "npm run clean-dirs && npm run build:esm && npm run build:cjs && npm run build:types",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:types": "tsc -p tsconfig.types.json",
